@@ -38,7 +38,7 @@ class EditLinksPlugin extends Omeka_Plugin_AbstractPlugin
   	  				  if ($params['module'] == 'simple-pages') {
       	  				$controller = 'simple-pages/index';
       	  				$editPart = '/edit/id/' . $params['id'];
-                  $nomContenu = ' cette Simple Page';    	  				
+                  $nomContenu = ' cette simple page';    	  				
     	  				}
   		  				// Exhibit Builder
     	  				if ($params['module'] == 'exhibit-builder') {
