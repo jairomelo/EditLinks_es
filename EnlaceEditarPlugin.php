@@ -7,7 +7,7 @@
  *
  */
 
-class EditLinksPlugin extends Omeka_Plugin_AbstractPlugin 
+class EnlaceEditarPlugin extends Omeka_Plugin_AbstractPlugin 
 {  
 
   protected $_filters = array(
@@ -20,7 +20,7 @@ class EditLinksPlugin extends Omeka_Plugin_AbstractPlugin
   			$params = Zend_Controller_Front::getInstance()->getRequest()->getParams();
   	  	$editLink = "";	
   	  	if (isset($params['controller'])) {
-   	      $nomContenu = ' ce contenu';
+   	      $nomContenu = ' este elemento';
   	  		if (in_array($params['controller'], array('page', 'items', 'collections', 'files', 'eman', 'exhibits')) && $params['action'] <> 'browse') {
   	  			if (in_array($currentUser->role, array('super', 'admin', 'editor'))) {
     	  			if (isset($params['id'])) {
@@ -38,7 +38,7 @@ class EditLinksPlugin extends Omeka_Plugin_AbstractPlugin
   	  				  if ($params['module'] == 'simple-pages') {
       	  				$controller = 'simple-pages/index';
       	  				$editPart = '/edit/id/' . $params['id'];
-                  $nomContenu = ' cette simple page';    	  				
+                  $nomContenu = ' esta página';    	  				
     	  				}
   		  				// Exhibit Builder
     	  				if ($params['module'] == 'exhibit-builder') {
@@ -47,11 +47,11 @@ class EditLinksPlugin extends Omeka_Plugin_AbstractPlugin
                   $page = $db->query("SELECT id FROM `$db->ExhibitPage` WHERE slug = '" . $params['page_slug_1'] . "'")->fetchAll();
                   if ($page[0]['id']) {
       	  					$editPart = '/edit-page/' . $page[0]['id'];
-      	  					$nomContenu = ' cette page d\'exposition';      	  					
+      	  					$nomContenu = ' esta página de exhibición';      	  					
                   } else {
                   	$front = $db->query("SELECT id FROM `$db->Exhibits` WHERE slug = '" . $params['slug'] . "'")->fetchAll();
                   	$editLink = '/exhibits/edit/' . $front[0]['id'];
-                  	$nomContenu = ' cette exposition';                  	
+                  	$nomContenu = ' esta exhibición';                  	
                   }
    	  				
     	  				}
@@ -67,7 +67,7 @@ class EditLinksPlugin extends Omeka_Plugin_AbstractPlugin
     	}    
     	if ($editLink != "") {
       	$nav[] = array(
-          'label' => __('Editer ' . $nomContenu),
+          'label' => __('Editar ' . $nomContenu),
           'uri' => url('/admin/' . $editLink)
         );      	
     	}
