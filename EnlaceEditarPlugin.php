@@ -1,12 +1,5 @@
 <?php
 
-/* 
- * E-man Plugin
- *
- * Functions to customize Omeka for the E-man Project
- *
- */
-
 class EnlaceEditarPlugin extends Omeka_Plugin_AbstractPlugin 
 {  
 
@@ -16,13 +9,13 @@ class EnlaceEditarPlugin extends Omeka_Plugin_AbstractPlugin
 
   public function filterPublicNavigationAdminBar($nav)
   {
-    	if ($currentUser = current_user()) {
+    	if ($usuarioActual = current_user()) {
   			$params = Zend_Controller_Front::getInstance()->getRequest()->getParams();
-  	  	$editLink = "";	
+  	  	$editEnlace = "";	
   	  	if (isset($params['controller'])) {
-   	      $nomContenu = ' este elemento';
+   	      $nomContenido = ' este elemento';
   	  		if (in_array($params['controller'], array('page', 'items', 'collections', 'files', 'eman', 'exhibits')) && $params['action'] <> 'browse') {
-  	  			if (in_array($currentUser->role, array('super', 'admin', 'editor'))) {
+  	  			if (in_array($usuarioActual->role, array('super', 'admin', 'editor'))) {
     	  			if (isset($params['id'])) {
                 $editPart = '/edit/'. $params['id'];
       	  	  }
@@ -38,7 +31,7 @@ class EnlaceEditarPlugin extends Omeka_Plugin_AbstractPlugin
   	  				  if ($params['module'] == 'simple-pages') {
       	  				$controller = 'simple-pages/index';
       	  				$editPart = '/edit/id/' . $params['id'];
-                  $nomContenu = ' esta página';    	  				
+                  $nomContenido = ' esta página';    	  				
     	  				}
   		  				// Exhibit Builder
     	  				if ($params['module'] == 'exhibit-builder') {
@@ -47,17 +40,17 @@ class EnlaceEditarPlugin extends Omeka_Plugin_AbstractPlugin
                   $page = $db->query("SELECT id FROM `$db->ExhibitPage` WHERE slug = '" . $params['page_slug_1'] . "'")->fetchAll();
                   if ($page[0]['id']) {
       	  					$editPart = '/edit-page/' . $page[0]['id'];
-      	  					$nomContenu = ' esta página de exhibición';      	  					
+      	  					$nomContenido = ' esta página de exhibición';      	  					
                   } else {
                   	$front = $db->query("SELECT id FROM `$db->Exhibits` WHERE slug = '" . $params['slug'] . "'")->fetchAll();
-                  	$editLink = '/exhibits/edit/' . $front[0]['id'];
-                  	$nomContenu = ' esta exhibición';                  	
+                  	$editEnlace = '/exhibits/edit/' . $front[0]['id'];
+                  	$nomContenido = ' esta exhibición';                  	
                   }
    	  				
     	  				}
   	  				} 
   	  				if ($controller && $editPart) {
-      					$editLink = $controller . $editPart;
+      					$editEnlace = $controller . $editPart;
   	  				}
   	  			}
   	  		}	  			 
@@ -65,10 +58,10 @@ class EnlaceEditarPlugin extends Omeka_Plugin_AbstractPlugin
     		  return $nav;
         }   	  	
     	}    
-    	if ($editLink != "") {
+    	if ($editEnlace != "") {
       	$nav[] = array(
-          'label' => __('Editar ' . $nomContenu),
-          'uri' => url('/admin/' . $editLink)
+          'label' => __('Editar ' . $nomContenido),
+          'uri' => url('/admin/' . $editEnlace)
         );      	
     	}
       return $nav;
