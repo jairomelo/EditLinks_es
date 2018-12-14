@@ -1,7 +1,3 @@
-# EditLinks
+# EnlaceEditar // EditLinks
 
-This very simple module adds "Edit this content" type links to the admin bar for authorized users.
-
-It works with Simple Pages and Exhibits as well as items, collections and files.
-
-
+Este *fork* solamente traduce el complemento [EditLinks](https://github.com/ENS-ITEM/EditLinks), con el cual se agrega una pestaña con la etiqueta "Editar este elemento", "página" o "exhibición", al menú de administración del sitio público de Omeka.
