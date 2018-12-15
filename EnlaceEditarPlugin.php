@@ -14,7 +14,7 @@ class EnlaceEditarPlugin extends Omeka_Plugin_AbstractPlugin
   	  	$editEnlace = "";	
   	  	if (isset($params['controller'])) {
    	      $nomContenido = ' este elemento';
-  	  		if (in_array($params['controller'], array('page', 'items', 'collections', 'files', 'eman', 'exhibits')) && $params['action'] <> 'browse') {
+  	  		if (in_array($params['controller'], array('page', 'items', 'collections', 'files', 'eman', 'exhibits')) && $params['action'] <> 'browse' && $params['action'] <> 'search') {
   	  			if (in_array($usuarioActual->role, array('super', 'admin', 'editor'))) {
     	  			if (isset($params['id'])) {
                 $editPart = '/edit/'. $params['id'];
